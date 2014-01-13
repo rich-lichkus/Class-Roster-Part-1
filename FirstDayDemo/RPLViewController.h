@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RPLViewController : UIViewController
-
+@interface RPLViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+                                                // <Protocol> - allows class to use methods of the protocal
+                                                // Datasource - num rows for data
+                                                // Delegate - user tapped on a cell
 @end
