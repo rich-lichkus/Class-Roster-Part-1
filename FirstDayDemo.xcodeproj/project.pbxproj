@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F2D488B18860E13007B51B7 /* RPLTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2D488A18860E13007B51B7 /* RPLTableDataSource.m */; };
+		0F3248F81885DD0C005324B4 /* Participant.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3248F71885DD0C005324B4 /* Participant.m */; };
+		0F3248FA1885E1DB005324B4 /* Bootcamp.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0F3248F91885E1DB005324B4 /* Bootcamp.plist */; };
 		0F880A42188460CA00D9B4BC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F880A41188460CA00D9B4BC /* Foundation.framework */; };
 		0F880A44188460CA00D9B4BC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F880A43188460CA00D9B4BC /* CoreGraphics.framework */; };
 		0F880A46188460CA00D9B4BC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F880A45188460CA00D9B4BC /* UIKit.framework */; };
@@ -14,13 +17,14 @@
 		0F880A4E188460CA00D9B4BC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F880A4D188460CA00D9B4BC /* main.m */; };
 		0F880A52188460CA00D9B4BC /* RPLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F880A51188460CA00D9B4BC /* RPLAppDelegate.m */; };
 		0F880A55188460CA00D9B4BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F880A53188460CA00D9B4BC /* Main.storyboard */; };
-		0F880A58188460CA00D9B4BC /* RPLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F880A57188460CA00D9B4BC /* RPLViewController.m */; };
 		0F880A5A188460CA00D9B4BC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F880A59188460CA00D9B4BC /* Images.xcassets */; };
 		0F880A61188460CA00D9B4BC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F880A60188460CA00D9B4BC /* XCTest.framework */; };
 		0F880A62188460CA00D9B4BC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F880A41188460CA00D9B4BC /* Foundation.framework */; };
 		0F880A63188460CA00D9B4BC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F880A45188460CA00D9B4BC /* UIKit.framework */; };
 		0F880A6B188460CA00D9B4BC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F880A69188460CA00D9B4BC /* InfoPlist.strings */; };
 		0F880A6D188460CA00D9B4BC /* FirstDayDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F880A6C188460CA00D9B4BC /* FirstDayDemoTests.m */; };
+		0F880ABC1884AB7900D9B4BC /* RPLTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F880ABB1884AB7900D9B4BC /* RPLTableViewController.m */; };
+		0FE264501885BB99008A4EEE /* RPLDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE2644F1885BB99008A4EEE /* RPLDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +38,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F2D488918860E13007B51B7 /* RPLTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPLTableDataSource.h; sourceTree = "<group>"; };
+		0F2D488A18860E13007B51B7 /* RPLTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPLTableDataSource.m; sourceTree = "<group>"; };
+		0F3248F61885DD0C005324B4 /* Participant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Participant.h; sourceTree = "<group>"; };
+		0F3248F71885DD0C005324B4 /* Participant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Participant.m; sourceTree = "<group>"; };
+		0F3248F91885E1DB005324B4 /* Bootcamp.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Bootcamp.plist; path = ../Bootcamp.plist; sourceTree = "<group>"; };
 		0F880A3E188460CA00D9B4BC /* FirstDayDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstDayDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F880A41188460CA00D9B4BC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0F880A43188460CA00D9B4BC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -45,14 +54,16 @@
 		0F880A50188460CA00D9B4BC /* RPLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RPLAppDelegate.h; sourceTree = "<group>"; };
 		0F880A51188460CA00D9B4BC /* RPLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RPLAppDelegate.m; sourceTree = "<group>"; };
 		0F880A54188460CA00D9B4BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0F880A56188460CA00D9B4BC /* RPLViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RPLViewController.h; sourceTree = "<group>"; };
-		0F880A57188460CA00D9B4BC /* RPLViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RPLViewController.m; sourceTree = "<group>"; };
 		0F880A59188460CA00D9B4BC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0F880A5F188460CA00D9B4BC /* FirstDayDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FirstDayDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F880A60188460CA00D9B4BC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		0F880A68188460CA00D9B4BC /* FirstDayDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FirstDayDemoTests-Info.plist"; sourceTree = "<group>"; };
 		0F880A6A188460CA00D9B4BC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0F880A6C188460CA00D9B4BC /* FirstDayDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstDayDemoTests.m; sourceTree = "<group>"; };
+		0F880ABA1884AB7900D9B4BC /* RPLTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPLTableViewController.h; sourceTree = "<group>"; };
+		0F880ABB1884AB7900D9B4BC /* RPLTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPLTableViewController.m; sourceTree = "<group>"; };
+		0FE2644E1885BB99008A4EEE /* RPLDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPLDetailViewController.h; sourceTree = "<group>"; };
+		0FE2644F1885BB99008A4EEE /* RPLDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPLDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,8 +126,14 @@
 				0F880A50188460CA00D9B4BC /* RPLAppDelegate.h */,
 				0F880A51188460CA00D9B4BC /* RPLAppDelegate.m */,
 				0F880A53188460CA00D9B4BC /* Main.storyboard */,
-				0F880A56188460CA00D9B4BC /* RPLViewController.h */,
-				0F880A57188460CA00D9B4BC /* RPLViewController.m */,
+				0FE2644E1885BB99008A4EEE /* RPLDetailViewController.h */,
+				0FE2644F1885BB99008A4EEE /* RPLDetailViewController.m */,
+				0F880ABA1884AB7900D9B4BC /* RPLTableViewController.h */,
+				0F880ABB1884AB7900D9B4BC /* RPLTableViewController.m */,
+				0F2D488918860E13007B51B7 /* RPLTableDataSource.h */,
+				0F2D488A18860E13007B51B7 /* RPLTableDataSource.m */,
+				0F3248F61885DD0C005324B4 /* Participant.h */,
+				0F3248F71885DD0C005324B4 /* Participant.m */,
 				0F880A59188460CA00D9B4BC /* Images.xcassets */,
 				0F880A48188460CA00D9B4BC /* Supporting Files */,
 			);
@@ -126,6 +143,7 @@
 		0F880A48188460CA00D9B4BC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0F3248F91885E1DB005324B4 /* Bootcamp.plist */,
 				0F880A49188460CA00D9B4BC /* FirstDayDemo-Info.plist */,
 				0F880A4A188460CA00D9B4BC /* InfoPlist.strings */,
 				0F880A4D188460CA00D9B4BC /* main.m */,
@@ -230,6 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F880A5A188460CA00D9B4BC /* Images.xcassets in Resources */,
+				0F3248FA1885E1DB005324B4 /* Bootcamp.plist in Resources */,
 				0F880A4C188460CA00D9B4BC /* InfoPlist.strings in Resources */,
 				0F880A55188460CA00D9B4BC /* Main.storyboard in Resources */,
 			);
@@ -250,9 +269,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FE264501885BB99008A4EEE /* RPLDetailViewController.m in Sources */,
+				0F880ABC1884AB7900D9B4BC /* RPLTableViewController.m in Sources */,
+				0F3248F81885DD0C005324B4 /* Participant.m in Sources */,
 				0F880A4E188460CA00D9B4BC /* main.m in Sources */,
+				0F2D488B18860E13007B51B7 /* RPLTableDataSource.m in Sources */,
 				0F880A52188460CA00D9B4BC /* RPLAppDelegate.m in Sources */,
-				0F880A58188460CA00D9B4BC /* RPLViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +483,7 @@
 				0F880A72188460CA00D9B4BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0F880A73188460CA00D9B4BC /* Build configuration list for PBXNativeTarget "FirstDayDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -469,6 +492,7 @@
 				0F880A75188460CA00D9B4BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

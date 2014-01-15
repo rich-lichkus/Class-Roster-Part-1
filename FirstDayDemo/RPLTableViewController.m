@@ -8,7 +8,11 @@
 
 #import "RPLTableViewController.h"
 
+
 @interface RPLTableViewController ()
+
+@property (strong, nonatomic) NSMutableArray *studentRoster;
+@property (strong, nonatomic) NSMutableArray *teacherRoster;
 
 @end
 
@@ -32,6 +36,29 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.studentRoster = [NSMutableArray new];
+    self.teacherRoster = [NSMutableArray new];
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Bootcamp" ofType:@"plist"];
+    NSArray *classRoster = [[NSArray alloc] initWithContentsOfFile:path];
+    
+    for(NSDictionary *attendee in classRoster)
+    {
+        Participant *newParticipant = [[Participant alloc] initWithName:[attendee objectForKey:@"name"]];
+        newParticipant.isInstructor = [[attendee objectForKey:@"instructor"] boolValue];
+        newParticipant.twitter = [attendee objectForKey:@"twitter"];
+        newParticipant.github = [attendee objectForKey:@"github"];
+        
+        if(newParticipant.isInstructor == YES)
+        {
+            [self.teacherRoster addObject:newParticipant];
+        }
+        else
+        {
+            [self.studentRoster addObject:newParticipant];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,29 +68,67 @@
 }
 
 #pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    NSInteger numberOfSections = 2;
+    return numberOfSections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    NSInteger numberOfRows = 0;
+    switch (section)
+    {
+        case 0:
+            numberOfRows = self.teacherRoster.count;
+            break;
+        case 1:
+            numberOfRows = self.studentRoster.count;
+            break;
+    }
+    return numberOfRows;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"myCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
-    
+    switch (indexPath.section)
+    {
+        case 0:
+            cell.textLabel.text = [[self.teacherRoster objectAtIndex:indexPath.row] name];
+            break;
+        case 1:
+            cell.textLabel.text = [[self.studentRoster objectAtIndex:indexPath.row] name];
+            break;
+    }
     return cell;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *sectionName;
+    switch (section)
+    {
+        case 0:
+            sectionName = @"Teachers";
+            break;
+        case 1:
+            sectionName = @"Students";
+            break;
+    }
+    return sectionName;
+}
+
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    UITableViewCell *selectedCell = (UITableViewCell *)sender;
+    
+    RPLDetailViewController *detailView = segue.destinationViewController;
+    
+    detailView.title = selectedCell.textLabel.text;
 }
 
 /*

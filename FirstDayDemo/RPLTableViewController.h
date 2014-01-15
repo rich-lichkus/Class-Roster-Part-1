@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RPLDetailViewController.h"
+#import "Participant.h"
+#import "RPLTableDataSource.h"
 
-@interface RPLTableViewController : UITableViewController
+@interface RPLTableViewController : UITableViewController <UITableViewDelegate>
 
 @end
