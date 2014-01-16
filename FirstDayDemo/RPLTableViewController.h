@@ -11,6 +11,6 @@
 #import "Participant.h"
 #import "RPLTableDataSource.h"
 
-@interface RPLTableViewController : UITableViewController <UITableViewDelegate>
+@interface RPLTableViewController : UITableViewController <UITableViewDelegate, UIActionSheetDelegate>
 
 @end

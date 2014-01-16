@@ -125,15 +125,10 @@
 			children = (
 				0F880A50188460CA00D9B4BC /* RPLAppDelegate.h */,
 				0F880A51188460CA00D9B4BC /* RPLAppDelegate.m */,
+				0FCA1A9E18874082007F6CD5 /* View */,
+				0FCA1A9D18874073007F6CD5 /* Controller */,
+				0FCA1A9B18872FE4007F6CD5 /* Model */,
 				0F880A53188460CA00D9B4BC /* Main.storyboard */,
-				0FE2644E1885BB99008A4EEE /* RPLDetailViewController.h */,
-				0FE2644F1885BB99008A4EEE /* RPLDetailViewController.m */,
-				0F880ABA1884AB7900D9B4BC /* RPLTableViewController.h */,
-				0F880ABB1884AB7900D9B4BC /* RPLTableViewController.m */,
-				0F2D488918860E13007B51B7 /* RPLTableDataSource.h */,
-				0F2D488A18860E13007B51B7 /* RPLTableDataSource.m */,
-				0F3248F61885DD0C005324B4 /* Participant.h */,
-				0F3248F71885DD0C005324B4 /* Participant.m */,
 				0F880A59188460CA00D9B4BC /* Images.xcassets */,
 				0F880A48188460CA00D9B4BC /* Supporting Files */,
 			);
@@ -168,6 +163,35 @@
 				0F880A69188460CA00D9B4BC /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0FCA1A9B18872FE4007F6CD5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0F3248F61885DD0C005324B4 /* Participant.h */,
+				0F3248F71885DD0C005324B4 /* Participant.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		0FCA1A9D18874073007F6CD5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0FE2644E1885BB99008A4EEE /* RPLDetailViewController.h */,
+				0FE2644F1885BB99008A4EEE /* RPLDetailViewController.m */,
+				0F880ABA1884AB7900D9B4BC /* RPLTableViewController.h */,
+				0F880ABB1884AB7900D9B4BC /* RPLTableViewController.m */,
+				0F2D488918860E13007B51B7 /* RPLTableDataSource.h */,
+				0F2D488A18860E13007B51B7 /* RPLTableDataSource.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		0FCA1A9E18874082007F6CD5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

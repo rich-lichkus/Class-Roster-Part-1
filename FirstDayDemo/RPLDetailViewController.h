@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Participant.h"
+@interface RPLDetailViewController : UIViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UIImagePickerControllerDelegate>
 
-@interface RPLDetailViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UILabel *lblTwitter;
-@property (strong, nonatomic) IBOutlet UILabel *lblGitHub;
-
+@property (nonatomic, weak) Participant *currentPart;
 @end

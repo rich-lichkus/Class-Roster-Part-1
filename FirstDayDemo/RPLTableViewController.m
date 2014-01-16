@@ -11,8 +11,9 @@
 
 @interface RPLTableViewController ()
 
-@property (strong, nonatomic) NSMutableArray *studentRoster;
-@property (strong, nonatomic) NSMutableArray *teacherRoster;
+@property (nonatomic, strong) RPLTableDataSource *dataSource;
+- (IBAction)sortPressed:(id)sender;
+
 
 @end
 
@@ -37,28 +38,9 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.studentRoster = [NSMutableArray new];
-    self.teacherRoster = [NSMutableArray new];
-    
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"Bootcamp" ofType:@"plist"];
-    NSArray *classRoster = [[NSArray alloc] initWithContentsOfFile:path];
-    
-    for(NSDictionary *attendee in classRoster)
-    {
-        Participant *newParticipant = [[Participant alloc] initWithName:[attendee objectForKey:@"name"]];
-        newParticipant.isInstructor = [[attendee objectForKey:@"instructor"] boolValue];
-        newParticipant.twitter = [attendee objectForKey:@"twitter"];
-        newParticipant.github = [attendee objectForKey:@"github"];
-        
-        if(newParticipant.isInstructor == YES)
-        {
-            [self.teacherRoster addObject:newParticipant];
-        }
-        else
-        {
-            [self.studentRoster addObject:newParticipant];
-        }
-    }
+    self.dataSource= [[RPLTableDataSource  alloc]init];
+    self.tableView.dataSource = self.dataSource;
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -67,60 +49,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    NSInteger numberOfSections = 2;
-    return numberOfSections;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    NSInteger numberOfRows = 0;
-    switch (section)
-    {
-        case 0:
-            numberOfRows = self.teacherRoster.count;
-            break;
-        case 1:
-            numberOfRows = self.studentRoster.count;
-            break;
-    }
-    return numberOfRows;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"myCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    switch (indexPath.section)
-    {
-        case 0:
-            cell.textLabel.text = [[self.teacherRoster objectAtIndex:indexPath.row] name];
-            break;
-        case 1:
-            cell.textLabel.text = [[self.studentRoster objectAtIndex:indexPath.row] name];
-            break;
-    }
-    return cell;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    NSString *sectionName;
-    switch (section)
-    {
-        case 0:
-            sectionName = @"Teachers";
-            break;
-        case 1:
-            sectionName = @"Students";
-            break;
-    }
-    return sectionName;
-}
-
+#pragma mark - Prepare For Seque
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -129,57 +58,44 @@
     RPLDetailViewController *detailView = segue.destinationViewController;
     
     detailView.title = selectedCell.textLabel.text;
+    NSInteger selectedRow = [[self.tableView indexPathForSelectedRow] row];
+    
+    detailView.currentPart = self.dataSource.teacherRoster[selectedRow];
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - IBAction
+
+- (IBAction)sortPressed:(id)sender {
+    
+    UIActionSheet *sortOptionASheet =  [[UIActionSheet alloc] initWithTitle:@"Sort Options"
+                                                                   delegate:self
+                                                          cancelButtonTitle:@"Cancel"
+                                                    destructiveButtonTitle:nil
+                                                          otherButtonTitles:@"Ascending", @"Descending", nil];
+    [sortOptionASheet showFromBarButtonItem:sender animated:YES];
+    
+}
+
+#pragma mark - Action Sheet
+
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if([[actionSheet buttonTitleAtIndex:buttonIndex]isEqualToString:@"Ascending"])
+    {
+        NSSortDescriptor *ascendingSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+        self.dataSource.studentRoster = [NSMutableArray arrayWithArray:[self.dataSource.studentRoster sortedArrayUsingDescriptors:@[ascendingSortDescriptor]]];
+        self.dataSource.teacherRoster = [NSMutableArray arrayWithArray:[self.dataSource.teacherRoster sortedArrayUsingDescriptors:@[ascendingSortDescriptor]]];
+    }
+    else if([[actionSheet buttonTitleAtIndex:buttonIndex]isEqualToString:@"Descending"])
+    {
+        NSSortDescriptor *descendingSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:NO];
+        self.dataSource.studentRoster = [NSMutableArray arrayWithArray:[self.dataSource.studentRoster sortedArrayUsingDescriptors:@[descendingSortDescriptor]]];
+        self.dataSource.teacherRoster = [NSMutableArray arrayWithArray:[self.dataSource.teacherRoster sortedArrayUsingDescriptors:@[descendingSortDescriptor]]];
+    }
+    
+    [self.tableView reloadData];
 }
 
- */
+
 
 @end

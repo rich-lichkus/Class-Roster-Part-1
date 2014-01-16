@@ -9,13 +9,43 @@
 #import "RPLTableDataSource.h"
 @interface RPLTableDataSource ()
 
-@property (strong, nonatomic) NSMutableArray *studentRoster;
-@property (strong, nonatomic) NSMutableArray *teacherRoster;
 
 @end
 
-
 @implementation RPLTableDataSource
+
+-(id) init {
+    self = [super init];
+    if(self){
+    
+        self.studentRoster = [NSMutableArray new];
+        self.teacherRoster = [NSMutableArray new];
+        
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"Bootcamp" ofType:@"plist"];
+        NSArray *classRoster = [[NSArray alloc] initWithContentsOfFile:path];
+        
+        for(NSDictionary *attendee in classRoster)
+        {
+            Participant *newParticipant = [[Participant alloc] initWithName:[attendee objectForKey:@"name"]];
+            newParticipant.isInstructor = [[attendee objectForKey:@"instructor"] boolValue];
+            newParticipant.twitter = [attendee objectForKey:@"twitter"];
+            newParticipant.github = [attendee objectForKey:@"github"];
+            
+            if(newParticipant.isInstructor == YES)
+            {
+                [self.teacherRoster addObject:newParticipant];
+            }
+            else
+            {
+                [self.studentRoster addObject:newParticipant];
+            }
+        }
+    
+    }
+    return self;
+}
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger numberOfSections = 2;
@@ -42,14 +72,26 @@
     static NSString *CellIdentifier = @"myCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    switch (indexPath.section)
+    Participant *newPart = [[Participant alloc]init];
+    NSString *participantName = [NSString stringWithFormat:@"%@.png", newPart.name];
+    
+    if(indexPath.section == 0)
     {
-        case 0:
-            cell.textLabel.text = [[self.teacherRoster objectAtIndex:indexPath.row] name];
-            break;
-        case 1:
-            cell.textLabel.text = [[self.studentRoster objectAtIndex:indexPath.row] name];
-            break;
+        newPart =self.teacherRoster[indexPath.row];
+        cell.textLabel.text = [[self.teacherRoster objectAtIndex:indexPath.row] name];
+        NSURL *docPath = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+        NSString *imagePath = [[docPath path] stringByAppendingPathComponent: participantName];
+        NSData *data = [NSData dataWithContentsOfFile:imagePath];
+        cell.imageView.image = [UIImage imageWithData:data];
+    }
+    else if(indexPath.section == 1)
+    {
+        cell.textLabel.text = [[self.studentRoster objectAtIndex:indexPath.row] name];
+        newPart = self.studentRoster[indexPath.row];
+        NSURL *docPath = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+        NSString *imagePath = [[docPath path] stringByAppendingPathComponent: participantName];
+        NSData *data = [NSData dataWithContentsOfFile:imagePath];
+        cell.imageView.image = [UIImage imageWithData:data];
     }
     return cell;
 }
