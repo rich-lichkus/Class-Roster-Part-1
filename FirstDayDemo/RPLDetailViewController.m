@@ -11,6 +11,16 @@
 @interface RPLDetailViewController ()
 - (IBAction)btnPressed:(id)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UITextField *txtTwitter;
+@property (weak, nonatomic) IBOutlet UITextField *txtGitHub;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UISlider *sldRed;
+@property (weak, nonatomic) IBOutlet UISlider *sldGreen;
+@property (weak, nonatomic) IBOutlet UISlider *sldBlue;
+
+- (IBAction)redSlide:(id)sender;
+- (IBAction)greenSlide:(id)sender;
+- (IBAction)blueSlide:(id)sender;
 
 @end
 
@@ -32,16 +42,42 @@
     
     NSString *participantName = [NSString stringWithFormat:@"%@.png", self.currentPart.name];
     NSURL *docPath = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-    NSString *imagePath = [[docPath path] stringByAppendingString:participantName];
+    NSString *imagePath = [[docPath path] stringByAppendingPathComponent:participantName];
     NSData *pickData = [NSData dataWithContentsOfFile:imagePath];
-    
+    NSLog(@"%@",imagePath);
     if(pickData)
     {
         self.imageView.image = [UIImage imageWithData:pickData];
         self.imageView.layer.cornerRadius = 50.0f;
         self.imageView.layer.masksToBounds = YES;
     }
+    
+    CGFloat red, green, blue,alpha;
+    [self.currentPart.favColor getRed:&red green:&green blue:&blue alpha:&alpha];
+    self.sldRed.value = red;
+    self.sldGreen.value = green;
+    self.sldBlue.value = blue;
+    
+    self.view.backgroundColor = self.currentPart.favColor;
+    
+    self.txtGitHub.text = self.currentPart.github;
+    self.txtTwitter.text = self.currentPart.twitter;
+    
+    self.scrollView.contentSize =  CGSizeMake(1000,1000);
+    self.scrollView.delegate = self;
+    self.txtTwitter.delegate = self;
+    self.txtGitHub.delegate = self;
+    
+    //Day 4 - Question #1 - Proof
+    NSLog(@"viewDidAppear was called");
 }
+
+-(void) viewWillAppear:(BOOL)animated  {
+    //Day 4 - Question #1 - Proof
+    NSLog(@"viewWillAppear was called");
+}
+
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -58,6 +94,8 @@
                                                          otherButtonTitles:@"Camera",@"Photo Library", nil];
     [photoActionSheet showFromBarButtonItem:sender animated:YES];
 }
+
+#pragma mark - ActionSheet
 
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
@@ -76,6 +114,7 @@
 
     [self presentViewController:myPicker animated:YES completion:nil];
 }
+
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -99,4 +138,27 @@
 
 
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    self.currentPart.twitter = self.txtTwitter.text;
+    self.currentPart.github = self.txtGitHub.text;
+    
+    [textField resignFirstResponder];
+    return NO;
+}
+
+- (IBAction)redSlide:(id)sender {
+    self.view.backgroundColor = [UIColor colorWithRed:self.sldRed.value green:self.sldGreen.value blue:self.sldBlue.value alpha:1.0];
+    self.currentPart.favColor = self.view.backgroundColor;
+}
+
+- (IBAction)greenSlide:(id)sender {
+    self.view.backgroundColor = [UIColor colorWithRed:self.sldRed.value green:self.sldGreen.value blue:self.sldBlue.value alpha:1.0];
+    self.currentPart.favColor = self.view.backgroundColor;
+}
+
+- (IBAction)blueSlide:(id)sender {
+    self.view.backgroundColor = [UIColor colorWithRed:self.sldRed.value green:self.sldGreen.value blue:self.sldBlue.value alpha:1.0];
+    self.currentPart.favColor = self.view.backgroundColor;
+}
 @end

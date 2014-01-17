@@ -40,6 +40,7 @@
     
     self.dataSource= [[RPLTableDataSource  alloc]init];
     self.tableView.dataSource = self.dataSource;
+
     [self.tableView reloadData];
 }
 
@@ -59,8 +60,16 @@
     
     detailView.title = selectedCell.textLabel.text;
     NSInteger selectedRow = [[self.tableView indexPathForSelectedRow] row];
+    NSInteger selectedSection = [[self.tableView indexPathForSelectedRow]section];
     
-    detailView.currentPart = self.dataSource.teacherRoster[selectedRow];
+    if(selectedSection ==0)
+    {
+        detailView.currentPart = self.dataSource.teacherRoster[selectedRow];
+    }
+    else if(selectedSection ==1)
+    {
+        detailView.currentPart = self.dataSource.studentRoster[selectedRow];
+    }
 }
 
 #pragma mark - IBAction

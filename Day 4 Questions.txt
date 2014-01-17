@@ -1,0 +1,9 @@
+Roster App Day 4
+
+1. I NSLogged from the viewDidLoad and the viewWillAppear. The print order is the order they execute.
+
+2. The four values are (x,y,width,height). The x,y is the position of the origin relative to its superclass view. The last two are the width and height of the rectangle.
+
+3. removeFromSuperview - this will remove a subview from its superclass.
+
+4. The frame is the size and position of the view in its superclass. Whereas the bounds set the origin and size for its subclass views.

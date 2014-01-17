@@ -15,6 +15,7 @@
 @property (nonatomic) NSString *github;
 @property (nonatomic) NSString *imageTitle;
 @property (nonatomic) BOOL isInstructor;
+@property (strong, nonatomic) UIColor *favColor;
 
 - (instancetype)initWithName:(NSString *)name;
 

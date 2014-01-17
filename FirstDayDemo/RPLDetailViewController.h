@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Participant.h"
-@interface RPLDetailViewController : UIViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UIImagePickerControllerDelegate>
+@interface RPLDetailViewController : UIViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UIImagePickerControllerDelegate,UITextFieldDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, weak) Participant *currentPart;
 @end

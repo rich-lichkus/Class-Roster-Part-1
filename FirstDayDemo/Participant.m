@@ -19,6 +19,7 @@
 		self.imageTitle = @"";
         self.twitter = @"";
         self.github = @"";
+        self.favColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
         
     }
 	return self;

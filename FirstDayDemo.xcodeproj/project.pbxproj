@@ -10,6 +10,7 @@
 		0F2D488B18860E13007B51B7 /* RPLTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2D488A18860E13007B51B7 /* RPLTableDataSource.m */; };
 		0F3248F81885DD0C005324B4 /* Participant.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3248F71885DD0C005324B4 /* Participant.m */; };
 		0F3248FA1885E1DB005324B4 /* Bootcamp.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0F3248F91885E1DB005324B4 /* Bootcamp.plist */; };
+		0F5D6EC0188892B60002DE95 /* Day 4 Questions.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0F5D6EBF188892B60002DE95 /* Day 4 Questions.txt */; };
 		0F880A42188460CA00D9B4BC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F880A41188460CA00D9B4BC /* Foundation.framework */; };
 		0F880A44188460CA00D9B4BC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F880A43188460CA00D9B4BC /* CoreGraphics.framework */; };
 		0F880A46188460CA00D9B4BC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F880A45188460CA00D9B4BC /* UIKit.framework */; };
@@ -43,6 +44,7 @@
 		0F3248F61885DD0C005324B4 /* Participant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Participant.h; sourceTree = "<group>"; };
 		0F3248F71885DD0C005324B4 /* Participant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Participant.m; sourceTree = "<group>"; };
 		0F3248F91885E1DB005324B4 /* Bootcamp.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Bootcamp.plist; path = ../Bootcamp.plist; sourceTree = "<group>"; };
+		0F5D6EBF188892B60002DE95 /* Day 4 Questions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Day 4 Questions.txt"; sourceTree = "<group>"; };
 		0F880A3E188460CA00D9B4BC /* FirstDayDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstDayDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F880A41188460CA00D9B4BC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0F880A43188460CA00D9B4BC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -93,6 +95,7 @@
 		0F880A35188460CA00D9B4BC = {
 			isa = PBXGroup;
 			children = (
+				0F5D6EBF188892B60002DE95 /* Day 4 Questions.txt */,
 				0F880A47188460CA00D9B4BC /* FirstDayDemo */,
 				0F880A66188460CA00D9B4BC /* FirstDayDemoTests */,
 				0F880A40188460CA00D9B4BC /* Frameworks */,
@@ -271,6 +274,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F5D6EC0188892B60002DE95 /* Day 4 Questions.txt in Resources */,
 				0F880A5A188460CA00D9B4BC /* Images.xcassets in Resources */,
 				0F3248FA1885E1DB005324B4 /* Bootcamp.plist in Resources */,
 				0F880A4C188460CA00D9B4BC /* InfoPlist.strings in Resources */,

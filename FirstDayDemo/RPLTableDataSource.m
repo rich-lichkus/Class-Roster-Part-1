@@ -72,27 +72,32 @@
     static NSString *CellIdentifier = @"myCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    Participant *newPart = [[Participant alloc]init];
-    NSString *participantName = [NSString stringWithFormat:@"%@.png", newPart.name];
+    Participant *eachParticipant = [[Participant alloc]init];
     
     if(indexPath.section == 0)
     {
-        newPart =self.teacherRoster[indexPath.row];
         cell.textLabel.text = [[self.teacherRoster objectAtIndex:indexPath.row] name];
+        
+        eachParticipant = self.teacherRoster[indexPath.row];
+        NSString *participantImageFileName = [NSString stringWithFormat:@"%@.png", eachParticipant.name];
+        eachParticipant = self.teacherRoster[indexPath.row];
         NSURL *docPath = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-        NSString *imagePath = [[docPath path] stringByAppendingPathComponent: participantName];
+        NSString *imagePath = [[docPath path] stringByAppendingPathComponent: participantImageFileName];
         NSData *data = [NSData dataWithContentsOfFile:imagePath];
         cell.imageView.image = [UIImage imageWithData:data];
     }
     else if(indexPath.section == 1)
     {
         cell.textLabel.text = [[self.studentRoster objectAtIndex:indexPath.row] name];
-        newPart = self.studentRoster[indexPath.row];
+        eachParticipant = self.studentRoster[indexPath.row];
+        NSString *participantImageFileName = [NSString stringWithFormat:@"%@.png", eachParticipant.name];
         NSURL *docPath = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-        NSString *imagePath = [[docPath path] stringByAppendingPathComponent: participantName];
+        NSString *imagePath = [[docPath path] stringByAppendingPathComponent: participantImageFileName];
         NSData *data = [NSData dataWithContentsOfFile:imagePath];
         cell.imageView.image = [UIImage imageWithData:data];
     }
+    cell.imageView.layer.cornerRadius = 12.0f;
+    cell.imageView.layer.masksToBounds = YES;
     return cell;
 }
 
