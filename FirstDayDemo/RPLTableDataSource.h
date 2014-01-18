@@ -12,8 +12,10 @@
 
 @interface RPLTableDataSource : NSObject <UITableViewDataSource>
 
+@property (strong, nonatomic) NSMutableArray *totalRoster;
 @property (strong, nonatomic) NSMutableArray *studentRoster;
 @property (strong, nonatomic) NSMutableArray *teacherRoster;
 
+-(void)archiveData;
 
 @end

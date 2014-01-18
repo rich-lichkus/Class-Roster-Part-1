@@ -8,15 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Participant : NSObject
+@interface Participant : NSObject <NSCoding>
 
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSString *twitter;
 @property (nonatomic) NSString *github;
 @property (nonatomic) NSString *imageTitle;
 @property (nonatomic) BOOL isInstructor;
-@property (strong, nonatomic) UIColor *favColor;
+@property (nonatomic) NSArray *favColorRGB;
 
 - (instancetype)initWithName:(NSString *)name;
+- (id)initWithCoder:(NSCoder *)decoder;
+- (void)encodeWithCoder:(NSCoder *)encoder;
 
 @end

@@ -70,6 +70,7 @@
     {
         detailView.currentPart = self.dataSource.studentRoster[selectedRow];
     }
+
 }
 
 #pragma mark - IBAction
@@ -105,6 +106,9 @@
     [self.tableView reloadData];
 }
 
-
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [self.dataSource archiveData];
+}
 
 @end

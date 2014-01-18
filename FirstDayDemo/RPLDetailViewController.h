@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "Participant.h"
+#import "RPLTableDataSource.h"
+
 @interface RPLDetailViewController : UIViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UIImagePickerControllerDelegate,UITextFieldDelegate, UIScrollViewDelegate>
 
-@property (nonatomic, weak) Participant *currentPart;
+@property (weak, nonatomic) Participant *currentPart;
+
+
+- (void) updateBackground;
 @end

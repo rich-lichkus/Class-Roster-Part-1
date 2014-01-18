@@ -18,37 +18,65 @@
     self = [super init];
     if(self){
     
+        self.totalRoster = [NSMutableArray new];
         self.studentRoster = [NSMutableArray new];
         self.teacherRoster = [NSMutableArray new];
+        NSURL *docPath = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+        NSString *archiveRosterPath = [[docPath path] stringByAppendingPathComponent:@"archiveRoster"];
         
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"Bootcamp" ofType:@"plist"];
-        NSArray *classRoster = [[NSArray alloc] initWithContentsOfFile:path];
-        
-        for(NSDictionary *attendee in classRoster)
+        if(![[NSFileManager defaultManager] fileExistsAtPath:archiveRosterPath])
         {
-            Participant *newParticipant = [[Participant alloc] initWithName:[attendee objectForKey:@"name"]];
-            newParticipant.isInstructor = [[attendee objectForKey:@"instructor"] boolValue];
-            newParticipant.twitter = [attendee objectForKey:@"twitter"];
-            newParticipant.github = [attendee objectForKey:@"github"];
+            // Get Info From PList
+            NSString *path = [[NSBundle mainBundle] pathForResource:@"Bootcamp" ofType:@"plist"];
+            NSArray *classRoster = [[NSArray alloc] initWithContentsOfFile:path];
             
-            if(newParticipant.isInstructor == YES)
+            for(NSDictionary *attendee in classRoster)
             {
-                [self.teacherRoster addObject:newParticipant];
+                Participant *newParticipant = [[Participant alloc] initWithName:[attendee objectForKey:@"name"]];
+                newParticipant.isInstructor = [[attendee objectForKey:@"instructor"] boolValue];
+                newParticipant.twitter = [attendee objectForKey:@"twitter"];
+                newParticipant.github = [attendee objectForKey:@"github"];
+                
+                if(newParticipant.isInstructor == YES)
+                {
+                    [self.teacherRoster addObject:newParticipant];
+                }
+                else
+                {
+                    [self.studentRoster addObject:newParticipant];
+                }
             }
-            else
-            {
-                [self.studentRoster addObject:newParticipant];
-            }
+            
+            [self.totalRoster addObject:self.teacherRoster];
+            [self.totalRoster addObject:self.studentRoster];
+            
+            [NSKeyedArchiver archiveRootObject:self.totalRoster toFile:archiveRosterPath];
         }
-    
+        else {
+            self.totalRoster = [NSKeyedUnarchiver unarchiveObjectWithFile:archiveRosterPath];
+            
+            for(Participant *newPart in self.totalRoster[0])
+            {
+                [self.teacherRoster addObject:newPart];
+            }
+
+            for(Participant *newPart in self.totalRoster[1])
+            {
+                [self.studentRoster addObject:newPart];
+            }
+            
+
+        }
+        
     }
     return self;
 }
+    
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    NSInteger numberOfSections = 2;
+    NSInteger numberOfSections = self.totalRoster.count;
     return numberOfSections;
 }
 
@@ -115,6 +143,17 @@
     }
     return sectionName;
 }
+
+
+- (void) archiveData {
+    
+    NSURL *docPath = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    NSString *archiveRosterPath = [[docPath path] stringByAppendingPathComponent:@"archiveRoster"];
+    [NSKeyedArchiver archiveRootObject:self.totalRoster toFile:archiveRosterPath];
+    
+}
+
+
 
 
 @end

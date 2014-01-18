@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UISlider *sldRed;
 @property (weak, nonatomic) IBOutlet UISlider *sldGreen;
 @property (weak, nonatomic) IBOutlet UISlider *sldBlue;
+@property (weak, nonatomic) RPLTableDataSource *dataSource;
 
 - (IBAction)redSlide:(id)sender;
 - (IBAction)greenSlide:(id)sender;
@@ -52,13 +53,14 @@
         self.imageView.layer.masksToBounds = YES;
     }
     
-    CGFloat red, green, blue,alpha;
-    [self.currentPart.favColor getRed:&red green:&green blue:&blue alpha:&alpha];
-    self.sldRed.value = red;
-    self.sldGreen.value = green;
-    self.sldBlue.value = blue;
+    self.sldRed.value = [self.currentPart.favColorRGB[0] floatValue];
+    self.sldGreen.value = [self.currentPart.favColorRGB[1] floatValue];
+    self.sldBlue.value = [self.currentPart.favColorRGB[2] floatValue];
     
-    self.view.backgroundColor = self.currentPart.favColor;
+    self.view.backgroundColor = [UIColor colorWithRed:[self.currentPart.favColorRGB[0] floatValue]
+                                                green:[self.currentPart.favColorRGB[1] floatValue]
+                                                 blue:[self.currentPart.favColorRGB[2] floatValue]
+                                                alpha:1.f];
     
     self.txtGitHub.text = self.currentPart.github;
     self.txtTwitter.text = self.currentPart.twitter;
@@ -137,28 +139,34 @@
 }
 
 
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     self.currentPart.twitter = self.txtTwitter.text;
     self.currentPart.github = self.txtGitHub.text;
-    
     [textField resignFirstResponder];
     return NO;
 }
 
 - (IBAction)redSlide:(id)sender {
-    self.view.backgroundColor = [UIColor colorWithRed:self.sldRed.value green:self.sldGreen.value blue:self.sldBlue.value alpha:1.0];
-    self.currentPart.favColor = self.view.backgroundColor;
+    [self updateBackground];
 }
 
 - (IBAction)greenSlide:(id)sender {
-    self.view.backgroundColor = [UIColor colorWithRed:self.sldRed.value green:self.sldGreen.value blue:self.sldBlue.value alpha:1.0];
-    self.currentPart.favColor = self.view.backgroundColor;
+    [self updateBackground];
 }
 
 - (IBAction)blueSlide:(id)sender {
-    self.view.backgroundColor = [UIColor colorWithRed:self.sldRed.value green:self.sldGreen.value blue:self.sldBlue.value alpha:1.0];
-    self.currentPart.favColor = self.view.backgroundColor;
+    [self updateBackground];
 }
+
+- (void) updateBackground{
+    
+    self.view.backgroundColor= [UIColor colorWithRed:self.sldRed.value green:self.sldGreen.value blue:self.sldBlue.value alpha:1.0];
+    self.currentPart.favColorRGB = @[[NSNumber numberWithFloat:self.sldRed.value],
+                                     [NSNumber numberWithFloat:self.sldGreen.value],
+                                     [NSNumber numberWithFloat:self.sldBlue.value]];
+    
+}
+
+
 @end
